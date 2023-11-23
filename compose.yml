@@ -1,20 +1,24 @@
 version: "3.3"
 services:
   homepage:
-    #image: ghcr.io/gethomepage/homepage:latest
     image: homepage_test
     build: 
-    dockerfile: ../homepage/Dockerfile
-    context: ../homepage/
+      dockerfile: Dockerfile-tilt
+      context: ~/Projects/homepage/
+      network: host
     container_name: homepage_test
     environment:
-      PUID: 1000 -- optional, your user id
-      PGID: 1000 -- optional, your group id
+      PUID: 1000
+      PGID: 1000
+      LOG_LEVEL: debug
+      NODE_OPTIONS: '--inspect-brk=0.0.0.0:9229' 
     ports:
       - 3000:3000
+      - 9229:9229
+    command: "pnpm dev"
     volumes:
       - ./app/config:/app/config # Make sure your local config directory exists
-      - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
+      - /var/run/docker.sock:/var/run/docker.sock:ro # for docker integrations
     restart: unless-stopped
 
   portainer:
@@ -28,11 +32,12 @@ services:
       - "portainer_data:/data"
     restart: always
     labels: 
+    # existing labels
       - homepage.group=Network Management
       - homepage.name=Portainer
       - homepage.icon=portainer
       - homepage.href=http://192.168.0.106:9000
     # new labels
-      - homepage.bookmarks.group1.portainer=http://192.168.0.106:9000
-volumes: 
-  portainer_data
+      - homepage.bookmarks.group1.portainer.PT=http://192.168.0.106:9000/
+volumes:
+  portainer_data:
