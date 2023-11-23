@@ -7,8 +7,7 @@ but this works for my development workflow.
 
 1. Run `docker compose up --build -d`.
 2. Navigate to `chrome://inspect/`.
-3. Click inspect underneath Target: `/usr/local/bin/pnpm
-file:///usr/local/lib/node_modules/pnpm/bin/pnpm.cjs`.
+3. Click inspect underneath Target: `/usr/local/bin/next`
 >*NOTE*: If the target does not exist, ensure  `Target discovery settings` contains `127.0.0.1:9229`.
 4. Chrome devtools will open. Click continue in debugger. 
 5. Navigate to `http://localhost:3000/`.
