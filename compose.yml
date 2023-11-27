@@ -38,8 +38,9 @@ services:
       - homepage.href=http://192.168.0.106:9000
     # new labels
       - homepage.bookmarks.portainer.name=My Portainer
-      - homepage.bookmarks.portainer.href=http://192.168.0.106:9000/
+      - homepage.bookmarks.portainer.href=http://192.168.0.106:9000
       - homepage.bookmarks.portainer.abbr=PT
+      - homepage.bookmarks.portainer.group=Group 1
     # TODO homepage.bookmarks.portainer.icon=
 volumes:
   portainer_data:
