@@ -1,2 +1,25 @@
 ---
 # sample kubernetes config
+
+mode: cluster
+
+kubernetes deployment:
+      containers:
+        - name: homepage
+          image: ghcr.io/benphelps/homepage:latest
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: TZ
+              value: America/Chicago
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccountName: homepage
+      serviceAccount: homepage
+      automountServiceAccountToken: true
+      securityContext: {}
+      schedulerName: default-scheduler
+      enableServiceLinks: true
